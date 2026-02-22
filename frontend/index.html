@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuthentiCheck</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+
+    <div class="badge">AI VERIFICATION PROTOCOL</div>
+
+    <h1 class="logo">Authenti<span>&lt;Check&gt;</span></h1>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('text', this)">Text</button>
+        <button class="tab" onclick="switchTab('image', this)">Image</button>
+        <button class="tab" onclick="switchTab('audio', this)">Audio</button>
+    </div>
+
+    <div class="glass-card">
+
+        <div class="input-section">
+
+            <textarea id="textInput" placeholder="Paste your content here..."></textarea>
+
+            <input type="file" id="fileInput" hidden>
+
+            <img id="previewImage" class="preview" />
+
+        </div>
+
+        <button class="analyze-btn" onclick="analyze()">
+            <span id="btnText">ANALYZE NOW</span>
+        </button>
+
+        <div class="results">
+
+            <div class="result-card human">
+                <h2 id="humanPercent">0%</h2>
+                <div class="progress">
+                    <div class="progress-bar human-bar" id="humanBar"></div>
+                </div>
+                <p>HUMAN WRITTEN</p>
+            </div>
+
+            <div class="result-card ai">
+                <h2 id="aiPercent">0%</h2>
+                <div class="progress">
+                    <div class="progress-bar ai-bar" id="aiBar"></div>
+                </div>
+                <p>AI GENERATED</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
