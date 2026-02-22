@@ -1,0 +1,21 @@
+# Virtual environments
+venv/
+.venv/
+.venv-1/
+Backend/venv/
+
+# Datasets
+dataset/
+fft_dataset/
+
+# Models
+saved_models/
+*.h5
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+Backend/app/uploads/
