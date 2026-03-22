@@ -1,66 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AuthentiCheck</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>AI Media Checker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<canvas id="particles"></canvas>
+<h1>AI Media Authenticity Checker</h1>
 
-<div class="container">
+<!-- Tabs -->
+<div class="tabs">
+    <button class="tab active" onclick="switchTab('text', this)">Text</button>
+    <button class="tab" onclick="switchTab('image', this)">Image</button>
+    <button class="tab" onclick="switchTab('audio', this)">Audio</button>
+</div>
 
-    <div class="badge">AI VERIFICATION PROTOCOL</div>
+<!-- Text -->
+<textarea id="textInput" placeholder="Enter text here..."></textarea>
 
-    <h1 class="logo">Authenti<span>&lt;Check&gt;</span></h1>
+<!-- File -->
+<input type="file" id="fileInput" hidden>
+<br>
+<button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+    Upload File
+</button>
 
-    <div class="tabs">
-        <button class="tab active" onclick="switchTab('text', this)">Text</button>
-        <button class="tab" onclick="switchTab('image', this)">Image</button>
-        <button class="tab" onclick="switchTab('audio', this)">Audio</button>
-    </div>
+<!-- Preview -->
+<br>
+<img id="previewImage">
 
-    <div class="glass-card">
+<!-- Analyze -->
+<br>
+<button type="button" class="btn" onclick="analyze()">ANALYZE NOW</button>
 
-        <div class="input-section">
+<!-- Results -->
+<div class="bar-container">
+    <p>Human: <span id="humanPercent">0%</span></p>
+    <div class="bar" id="humanBar"></div>
 
-            <textarea id="textInput" placeholder="Paste your content here..."></textarea>
-
-            <input type="file" id="fileInput" hidden>
-
-            <img id="previewImage" class="preview" />
-
-        </div>
-
-        <button class="analyze-btn" onclick="analyze()">
-            <span id="btnText">ANALYZE NOW</span>
-        </button>
-
-        <div class="results">
-
-            <div class="result-card human">
-                <h2 id="humanPercent">0%</h2>
-                <div class="progress">
-                    <div class="progress-bar human-bar" id="humanBar"></div>
-                </div>
-                <p>HUMAN WRITTEN</p>
-            </div>
-
-            <div class="result-card ai">
-                <h2 id="aiPercent">0%</h2>
-                <div class="progress">
-                    <div class="progress-bar ai-bar" id="aiBar"></div>
-                </div>
-                <p>AI GENERATED</p>
-            </div>
-
-        </div>
-
-    </div>
+    <p>AI: <span id="aiPercent">0%</span></p>
+    <div class="bar" id="aiBar"></div>
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
