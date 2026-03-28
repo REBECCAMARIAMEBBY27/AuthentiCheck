@@ -1,4 +1,1 @@
-def predict_audio(file_path):
-    prediction = "AI Generated"
-    confidence = 85.0
-    return prediction, confidence
+from app.services.predict_audio import predict_audio
