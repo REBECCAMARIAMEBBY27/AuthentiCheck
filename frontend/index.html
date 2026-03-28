@@ -29,20 +29,14 @@
 
 <!-- Preview -->
 <br>
-<img id="previewImage">
+<img id="previewImage" style="max-width:300px; display:none;">
 
 <!-- Analyze -->
 <br>
 <button type="button" class="btn" onclick="analyze()">ANALYZE NOW</button>
 
-<!-- Results -->
-<div class="bar-container">
-    <p>Human: <span id="humanPercent">0%</span></p>
-    <div class="bar" id="humanBar"></div>
-
-    <p>AI: <span id="aiPercent">0%</span></p>
-    <div class="bar" id="aiBar"></div>
-</div>
+<!-- ✅ NEW RESULT DISPLAY -->
+<div id="result" style="margin-top:20px; font-size:22px;"></div>
 
 <script src="script.js"></script>
 

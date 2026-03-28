@@ -33,18 +33,6 @@ document.getElementById("fileInput").addEventListener("change", function () {
     }
 });
 
-// Animate %
-function animateCounter(el, target) {
-    let count = 0;
-    let interval = setInterval(() => {
-        if (count >= target) clearInterval(interval);
-        else {
-            count++;
-            el.innerText = count + "%";
-        }
-    }, 10);
-}
-
 // Analyze
 function analyze() {
 
@@ -83,16 +71,50 @@ function analyze() {
         method: "POST",
         body: formData
     })
-    .then(res => res.json())
-    .then(data => {
-        const ai = Math.round(data.confidence);
-        const human = 100 - ai;
-
-        animateCounter(document.getElementById("aiPercent"), ai);
-        animateCounter(document.getElementById("humanPercent"), human);
-
-        document.getElementById("aiBar").style.width = ai + "%";
-        document.getElementById("humanBar").style.width = human + "%";
+    .then(async res => {
+        if (!res.ok) {
+            const text = await res.text();
+            throw new Error("Server error: " + text);
+        }
+        return res.json();
     })
-    .catch(() => alert("Backend error"));
+    .then(data => {
+
+        console.log("BACKEND RESPONSE:", data);
+
+        let prediction = data.prediction;
+        let confidence;
+
+        // Case 1: confidence is 0–1
+        if (data.confidence <= 1) {
+            const ai = data.confidence * 100;
+            const human = 100 - ai;
+
+            if (prediction === "AI Generated") {
+                confidence = ai;
+            } else {
+                confidence = human;
+            }
+        }
+
+        // Case 2: confidence already 0–100
+        else {
+            confidence = data.confidence;
+        }
+
+        confidence = Math.round(confidence);
+
+        const resultDiv = document.getElementById("result");
+
+        const color = prediction === "AI Generated" ? "#ef4444" : "#22c55e";
+
+        resultDiv.innerHTML = `
+            <h2 style="color:${color}">${prediction}</h2>
+            <p>Confidence: ${confidence}%</p>
+        `;
+    })
+    .catch(err => {
+        console.error("ERROR:", err);
+        alert(err.message);
+    });
 }
